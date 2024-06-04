@@ -938,8 +938,7 @@ input::-moz-focus-inner {
 			 ul.actions.fit.stacked {
 				width: 100%;
 			} 
-_____________________________________________
-_____________________________________________736
+
 
 	@media screen and (max-width: 736px) {
 
@@ -1154,11 +1153,10 @@ _____________________________________________736
 		}
 
 		 input[type="submit"].alt,
-		input[type="reset"].alt,
-		input[type="button"].alt,
-		button.alt,
-		.button.alt {
-			background-color: ;
+		 input[type="reset"].alt,
+		 input[type="button"].alt,
+		 button.alt,
+		 .button.alt {
 			color: #fff;
 		} 
 
@@ -1204,7 +1202,7 @@ _____________________________________________736
 
   /* Box */
 
-  	 .box.highlight {
+ .box.highlight {
 		text-align: center;
 	} 
 
