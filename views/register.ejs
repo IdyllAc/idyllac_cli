@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register EJS</title>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+        integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" /> 
+
+<style>
+    body {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: Arial, Helvetica, sans-serif;
+        font-size: 1.5rem;
+        background-color: #333;
+        color: whitesmoke;
+        width: 60%;
+        margin: auto;
+    }
+
+    h1 {
+        text-align: center;
+        font-family: Georgia, 'Times New Roman', Times, serif;
+    }
+
+    p {
+        text-align: center;
+        color: whitesmoke;
+        font-weight: bolder;
+    }
+
+    input {
+        width: 15rem;
+        height: 2.2rem;
+        border-radius: 5px;
+        background-color: whitesmoke;
+        color: #333;
+    }
+
+    button {
+        background-color: orange;
+        width: 8rem;
+        height: 2rem;
+        border-radius: 5px;
+        border: none;
+    }
+
+    form {
+        text-align: center;
+    }
+
+    label {
+        display: block;
+    }
+
+    /* || FOOTER */
+    .footer {
+        position: sticky;
+        text-align: center;
+        margin-top: 1rem;
+        bottom: O;
+        color: whitesmoke;
+        padding-bottom: 0.7em;
+        font-size: 0.9em;
+    }
+</style>
+</head>
+<body>
+    <h1 style="display: block; color: whitesmoke; margin-top: 70px;">مرحباً بك على منصة تطبيق إيديلك</h1>
+    <p style="color: whitesmoke;"> Welcome within IdyllAc</p>
+
+    <p style="background-color:green">Still not subscribed so far?
+        Fill the form.</p>
+
+    <h1 class="mb-3 h3">Register</h1>
+
+    <% if (messages.error) { %>
+        <%= messages.error %>
+            <% } %>
+
+                <form action="/register" method="POST">
+
+                    <div class="row">
+                        <div class="alert alert-danger"></div>
+
+                        <h1 style="font-family: cursive;">Register here:</h1>
+                    </div>
+
+                    <div>
+                        <label for="name">Name:</label>
+                        <input type="text" id="name" name="name" autocomplete="on" placeholder="Enter your name" required>
+                    </div>
+                    <div>
+                        <label for="email">Email:</label>
+                        <input type="email" id="email" name="email" maxlength="150" onkeyup="validateEmail()"
+                         autocomplete="on"  placeholder="Enter your cemail" required>
+                    </div>
+
+                    <div>
+                        <label for="email">confirmation email:</label>
+                        <input type="email" id="cemail" name="cemail" maxlength="150" onkeyup="validateCemail()"
+                         autocomplete="on" placeholder="Re-enter confirmation email" required>
+                    </div>
+
+                    <div>
+                        <label for="password">Password:</label>
+                        <input type="password" id="password" name="password"  maxlength="150" autocomplete="off" placeholder="Enter strong password and remember it" required>
+                        <br>
+                        <small style="font-size:small;">Password eight caracters long minimum.<br> Use upper/smallcase letters one at least, add poinctuation: <br>#@&!$%/?-.=+</small>
+                    </div>
+                    <br>
+                    <button type="submit">SignUp</button>
+                </form>
+
+                <br>
+                <h3>
+                    <p style="background-color:green;">Already have an account?
+                        <a href="./views/login.ejs" style="color: orange;">Log in</a>
+                    </p>
+                </h3>
+
+                <footer class="footer">
+                    <span class="nowrap">Copyrights &copy; <time id="year"></time></span>
+                    <span class="nowrap">IdyllAc</span>
+                </footer>
+
+                <script src="https://kit.fontawesome.com/283a7ae800.js" crossorigin="anonymous"></script>
+   </body>
+ </html> 
