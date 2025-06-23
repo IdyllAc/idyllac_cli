@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Subscribe to News</title>
+  <link rel="stylesheet" href="CSS/style.css">
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 2rem;
+      text-align: center;
+    }
+    input[type="email"], textarea {
+      padding: 0.5rem;
+      width: 300px;
+      margin-bottom: 1rem;
+    }
+    button, a {
+      padding: 0.5rem 1rem;
+      margin: 0.5rem;
+      display: inline-block;
+      text-decoration: none;
+    }
+    form {
+      margin: 2rem 0;
+    }
+  </style>
+</head>
+<body>
+  <h1>📬 Subscribe to our news</h1>
+  <p>Choose how you want to subscribe:</p>
+
+  <h2>📧 Subscribe via Email</h2>
+  <form action="/subscriber/email" method="POST" id="email-form">
+    <input type="email" name="email" placeholder="Enter your email" required />
+    <button type="submit">Submit</button>
+  </form>
+
+  <hr>
+
+  <section>
+    <h2>📱 Social Login</h2>
+    <p>:And so on / Et aussi de suite / وكذلك أيضاً</p>
+    <p>Login via:</p>
+    <a href="/auth/facebook">🔵 Facebook</a>
+    <h3>:Or via / Ou via / أو عبر</h3>
+    <p>Login with:</p>
+    <a href="/auth/google">🟢 Google</a>
+  </section>
+
+  <hr>
+
+  <h5 style="color: #333;">
+    If you have any problem crossing any barrier, contact us. //
+    Si vous avez des difficultés à franchir une barrière, contactez-nous. //
+    إذا واجهت أي مشكلة في تخطي حاجز، اتصل بنا.
+  </h5>
+
+  <h4 style="color: #333;">
+    :Valid email لطرح الأسئلة ومزيد من الإستفسار سجل عنوان بريدك الإلكتروني وقم بالتساؤل والإرسال
+  </h4>
+
+  <form action="/submit" method="POST" id="message-form">
+    <input type="email" name="email" placeholder="Enter your email" required><br>
+    <h4 style="color: rgb(36, 36, 224);">:إدرج السؤال في الخانة المخصصة وقم بالإرسال بالنقر على الزر إرسال أسفله #</h4>
+    <textarea name="message" placeholder="Write your message shortly here" cols="30" rows="10" required></textarea><br><br>
+    <button type="submit">Submit</button>
+  </form>
+
+  <p id="status"></p>
+
+  <script>
+    // Handle async form submission only for the subscription form
+    document.getElementById("email-form").addEventListener("submit", async (e) => {
+      e.preventDefault();
+      const form = e.target;
+      const formData = new FormData(form);
+      const status = document.getElementById("status");
+
+      const res = await fetch(form.action, {
+        method: "POST",
+        body: formData
+      });
+
+      const text = await res.text();
+      status.textContent = text;
+    });
+  </script>
+
+</body>
+</html>

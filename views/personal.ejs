@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Forms</title>
+  <link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
+  <script src="https://kit.fontawesome.com/ab8baff07d.js" crossorigin="anonymous"></script>
+  <script src="https://kit.fontawesome.com/cbdd759dc1.js" crossorigin="anonymous"></script>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 1.5rem;
+      background-image: linear-gradient(#1f7d5f, whitesmoke);
+    }
+    h1 { color: rgba(168, 227, 250, 0.955) }
+    .responsive {
+      width: 30%;
+      height: auto;
+      display: block;
+      margin: auto;
+      background-color: transparent;
+    }
+    h2 { text-align: center; color: orange; }
+    p { text-align: center; color: #777777; margin-bottom: 3em; }
+    input { font: inherit; width: fit-content; }
+    html { scroll-behavior: smooth; }
+    h5 { color: orange; }
+    .container {
+      width: 100%;
+      height: 70vh;
+      background: none;
+      display: inline-block;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+    }
+    .container form {
+      display: block;
+      margin: auto;
+      width: 420px;
+      padding: 10px 30px 20px;
+      border-radius: 4px;
+      box-shadow: 10px 20px 20px rgba(0, 0, 0, 0.5);
+      position: relative;
+      background: #1f7d5f;
+      color: #fff;
+    }
+    .fa-paper-plane {
+      position: absolute;
+      top: 0;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background: orange;
+      color: #1f7d5f;
+      font-size: 30px;
+      padding: 15px;
+      border-radius: 50%;
+      box-shadow: 0 0 10px (0, 0, 0, 0.5);
+    }
+    .input-group {
+      width: 100%;
+      display: block;
+      align-items: center;
+      margin: 10px auto 0;
+      position: relative;
+    }
+    .input-group label {
+      flex-basis: 20%;
+      display: block;
+      font-size: 16px;
+      color: whitesmoke;
+    }
+    .input-group input {
+      background: transparent;
+      border: 0;
+      outline: 0;
+      padding: 2px 0;
+      border-bottom: 1px solid #999;
+      color: chartreuse;
+      font-size: 16px;
+      width: 100%;
+    }
+    ::placeholder {
+      font-size: 16px;
+      color: wheat;
+    }
+    form button {
+      background-color: orange;
+      color: white;
+      border-radius: 4px;
+      border: none;
+      padding: 10px 40px;
+      cursor: pointer;
+      display: block;
+      margin: auto;
+    }
+    .input-group span {
+      position: absolute;
+      bottom: 12px;
+      right: 17px;
+      font-size: 14px;
+      color: red;
+    }
+    #submit-error { color: red; }
+    .btn:hover {
+      background-color: #1f7d5f;
+      color: white;
+    }
+    h6 { color: #333; }
+    .content .nowrap {
+      display: block;
+      margin: auto;
+      position: sticky;
+      bottom: 0;
+      padding-bottom: 0.7em;
+      font-size: 0.9em;
+      color: #1f7d5f;
+    }
+  </style>
+</head>
+
+<body>
+  <br><br>
+  <div class="container">
+    <form id="personalInfoForm">
+        <i class="fa-regular fa-paper-plane"></i>
+        <h2>Personnel Information</h2>
+        <h5>Fill & send your form here</h5>
+      
+        <div class="genderContainer">
+          <label>Gender: </label>
+          <input class="gender1" type="radio" name="gender" value="Madame">Madame
+          <input class="gender1" type="radio" name="gender" value="Monsieur">Monsieur
+        </div>
+      
+        <div class="input-group">
+          <label>
+            Name:
+            <input type="text" id="name" name="name" maxlength="100" placeholder="Enter your name" required>
+            <span id="name-error"></span>
+          </label>
+        </div>
+      
+        <div class="input-group">
+          <label>
+            First name:
+            <input type="text" id="firstname" name="firstname" maxlength="100" placeholder="Enter firstname" required>
+            <span id="firstname-error"></span>
+          </label>
+        </div>
+      
+        <div class="input-group">
+          <label>
+            Date of birth:
+            <input type="date" id="date" name="dateOfBirth" maxlength="10" required>
+            <span id="date-error"></span>
+          </label>
+        </div>
+      
+        <div class="input-group">
+          <label>
+            Phone:
+            <input type="tel" id="phone" name="phone" maxlength="20" placeholder="+1(234) 567890" required>
+            <span id="phone-error"></span>
+          </label>
+        </div>
+      
+        <br>
+        <button type="submit">Submit</button>
+        <span id="submit-error"></span>
+      
+        <h6><small>If everything is done correctly, you should receive a corresponding message.</small></h6>
+      </form>
+    </div>
+    <br>
+
+    <footer class="content">
+      <span class="nowrap">Copyright &copy; <time id="year">IdyllAc</time></span>
+    </footer>
+  
+      
+      <script>
+      document.getElementById('personalInfoForm').addEventListener('submit', async (e) => {
+        e.preventDefault();
+      
+        const form = e.target;
+        const formData = new FormData(form);
+        const data = Object.fromEntries(formData.entries());
+      
+        const token = localStorage.getItem('accessToken');
+      
+        const res = await fetch('https://anypay.cards/submit/personal_info', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ` + accessToken, // if using JWT
+          },
+          body: JSON.stringify(data)
+        });
+      
+        if (res.ok) {
+          window.location.href = '/upload/document';
+        } else {
+          const error = await res.json();
+          alert(error.message || 'Submission failed.');
+        }
+      });
+      </script>
+  
+  <!-- <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const form = document.getElementById('personalInfoForm');
+
+      form.addEventListener('submit', async (e) => {
+        e.preventDefault();
+
+        const formData = new FormData(form);
+        const data = Object.fromEntries(formData);
+
+        const token = localStorage.getItem('accessToken');
+        if (!token) {
+          alert("Access token missing. Please log in.");
+          return;
+        }
+
+        try {
+          const res = await fetch('https://anypay.cards/submit/personal_info', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+              'Authorization': `Bearer ${token}`
+            },
+            body: JSON.stringify(data)
+          });
+
+          if (res.ok) {
+            window.location.href = '/upload/document';
+          } else {
+            const error = await res.json();
+            alert(error.message || 'Submission failed.');
+          }
+        } catch (err) {
+          console.error(err);
+          alert('Network error. Please try again.');
+        }
+      });
+    });
+  </script> -->
+
+</body>
+</html>

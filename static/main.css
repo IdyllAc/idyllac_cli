@@ -1,0 +1,459 @@
+@import url("fontawesome-all.min.css");
+@import url("https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,300italic,600,600italic");
+
+/*
+	IdyllAc workspace of the mean page
+*/
+
+  body {
+	margin: 0;
+	padding: 0; 
+	box-sizing: border-box;
+	font: inherit;
+
+} 
+
+  header, nav, section {
+	display: block;
+	margin: auto;
+	
+}
+
+  body {
+	background-color: gray;
+	line-height: 1px;
+}
+
+/* Basic */
+
+  html {
+	  box-sizing: border-box;
+	  scroll-behavior:smooth;
+	}  
+
+
+
+  header > a {
+  color: #37c0fb;
+		font-weight: 400;
+		text-decoration: none;
+		border-bottom: dotted 1px;
+ }
+
+  header a:hover {
+			color: orange;
+			border-bottom-color: transparent;
+		} 
+
+
+	
+
+	 h1, h2, h3 {
+		display: block;
+		margin: auto;
+		color: inherit;
+		font-size: 0.97em;
+		font-weight: 600;
+		line-height: 1.75em;
+		margin-bottom: 1em;
+		letter-spacing: 1px;
+	    }
+
+	
+	 h3 a {
+		font-size: 1.2rem;
+		color: inherit;
+		text-decoration: none;
+		letter-spacing: 1px;
+		} 
+
+     a {
+		font-size: 1em;
+		font-weight: 600;
+	    letter-spacing: 1px;
+	    text-decoration: None;
+     }
+
+
+ /* Container */
+	
+	.container {
+		margin: 0 auto;
+		max-width: 100%;
+		width: 1400px;
+	}
+
+	
+	.content {
+		box-sizing: border-box;
+		display: block;
+		margin: auto;
+		background-color: rgba(27, 27, 27, 0.75);
+		color: whitesmoke;
+		padding: 1px 8rem;
+		text-align: center;
+		line-height: 0.5rem;
+		font-size: small;
+		position: sticky;
+	    }
+
+
+	@media screen and (max-width: 480px) {
+
+	         .container {
+			      width: 100%;
+			}
+
+		} 
+
+
+  /* Mobile (Portrait) */
+
+	@media screen and (max-width: 480px) {
+
+	     }
+
+		
+
+
+		/* Section/Article */
+
+	header.major {
+		text-align: center;
+		margin: 0 0 2em 0;
+	}
+
+.responsive {
+	width: 60%;
+	height: auto;
+} 
+
+
+  /* Image */
+		
+  img {
+	background-color: gray;
+	width:800px;
+	display: block;
+	margin: auto;
+
+}
+
+   /* Mobile */
+
+	@media screen and (max-width: 736px) {
+
+		 .container {
+				width: 90%;
+			}  
+
+
+		/* Basic */
+ 
+			 body {
+				font-size: 11pt;
+				line-height: 1.35em;
+			}  
+
+			h2 {
+				font-size: 1.25em;
+				letter-spacing: 0;
+				line-height: 1.35em;
+			}
+
+			h3 {
+				font-size: 1em;
+				letter-spacing: 0;
+				line-height: 1.35em;
+			}
+
+		/* Banner */
+
+			#banner {
+				height: 18em;
+			}
+
+	}
+   
+
+  /* Header */
+
+  	  #header {
+		text-align: center;
+		background-color: orange;
+	} 
+
+
+			/* Nav */
+
+	#nav {
+		cursor: default;
+		background-color: #333;
+		padding: 0; 
+	}
+
+		#nav:after {
+			content: '';
+			display: block;
+			width: 100%;
+			height: 0.75em; 
+			background-color: #37c0fb;
+			background-image: url("images/bg01.png");
+		}
+
+		#nav > ul {
+			margin: 0;
+		}
+
+			#nav > ul > li {
+				position: relative;
+				display: inline-block;
+				margin-left: 1em;
+			}
+
+				#nav > ul > li a {
+					color: #c0c0c0;
+					text-decoration: none;
+					border: 0;
+					display: block;
+					padding: 1.5em 0.5em 1.35em 0.5em;
+				}
+
+				#nav > ul > li:first-child {
+					margin-left: 0;
+				}
+
+				#nav > ul > li:hover a {
+					color: orange;
+				}
+
+				#nav > ul > li.current {
+					font-weight: 300;
+				} 
+
+			    #nav > ul > li.current:before {
+						-moz-transform: rotateZ(45deg);
+						-webkit-transform: rotateZ(45deg);
+						-ms-transform: rotateZ(45deg);
+						transform: rotateZ(45deg);
+						width: 0.75em;
+						height: 0.75em;
+						content: '';
+						display: block;
+						position: absolute;
+						bottom: -0.5em;
+						left: 50%; 
+						margin-left: -0.375em;
+						background-color: #37c0fb;
+					} 
+
+					 #nav > ul > li.current a {
+						color: #fff;
+					} 
+
+				  #nav > ul > li.active a {
+					color: limegreen;
+				}
+
+				  #nav > ul > li.active.current:before {
+					opacity: 0;
+				}
+
+				  #nav > ul > li > ul {
+					display: none;
+				} 
+
+  /* Banner */
+
+  #banner {
+		background-image: url("/images/banner.jpg");
+		background-position: center;
+		background-size: cover;
+		height: 48em;
+		text-align: center;
+		position: relative;
+	}
+
+		 #banner header {
+			position: absolute;
+			bottom: 0;
+			left: 0;
+			width: 100%;
+			background: rgba(27, 27, 27, 0.75);
+			color: #fff;
+			padding: 1.5em 0;
+		}
+		
+		 #banner header h1 {
+			display:block;
+			margin: 0;
+			font-size: 3em;
+			font-family: Georgia, 'Times New Roman', Times, serif;
+			color: #fff ;
+		}
+
+			
+		 #banner header h2 {
+			 display: inline-block;
+			 margin: 0;
+			 font-size: 1.5em;
+			 vertical-align: middle;
+			 color:#37c0fb;
+			}
+
+		  #banner  header  h3 { 
+				display: inline-block;
+				margin: 0;
+				font-size: 1em;
+				vertical-align: middle;
+				color: #37c0fb;
+			 }  
+
+
+   /* Wrapper */
+
+		 .wrapper {
+			background-image: url("/images/banner.jpg");
+			margin: 40px;
+			padding: 5em 0 3em 0;
+		} 
+		
+		
+
+		@media screen and (max-width: 736px) {
+
+		} 
+
+
+  		@media screen and (max-width: 840px) {
+
+			 /* .container {
+				width: 95%;
+			}  */
+
+		}
+
+
+  		@media screen and (max-width: 840px) {
+
+		}
+ 
+
+		@media screen and (max-width: 840px) {
+
+		/* Banner */
+
+			
+  }
+
+
+  	    @media screen and (max-width: 980px) {
+
+			
+
+		}
+
+        /* Narrow */
+
+	    @media screen and (max-width: 980px) {
+
+	    }
+
+
+
+        /* Narrow */
+
+		@media screen and (max-width: 980px) {
+		}
+	 
+
+ 	    @media screen and (max-width: 1280px) {
+		}
+
+  		@media screen and (max-width: 1280px) {
+
+			 /* .row {
+				display: flex;
+				flex-wrap: wrap;
+				box-sizing: border-box;
+				align-items: stretch;
+			}   */
+
+		}
+ 
+
+  @media screen and (max-width: 1680px) {
+
+			/* .container {
+				width: 1200px;
+			} */
+
+		}
+
+        /* Wide */
+
+  	@media screen and (max-width: 1680px) {
+
+		/* Basic */
+
+			/* body {
+				font-size: 14pt;
+				line-height: 1.5em;
+			} */
+
+		/* Banner */
+
+			#banner {
+				height: 24em;
+			}
+
+	}
+
+ /* Normal */
+
+ 	@media screen and (max-width: 1680px) {
+
+		/* Basic */
+
+			body{
+				font-size: 14pt;
+				line-height: 1.5em;
+			}
+
+
+    	/* Icons */
+
+			ul.icons li a, ul.icons li span {
+				font-size: 1.5em;
+			}
+
+   /* Header */
+
+			#header {
+				padding: 2em 0 0 0;
+			}
+
+				#header h1 {
+					padding: 0 0 1.75em 0;
+				}
+
+    /* Banner */
+
+			#banner {
+				height: 22em;
+			}
+
+   /* Wrapper */
+
+			.wrapper {
+				padding: 3em 0 1em 0;
+			}
+
+	}
+
+
+	@media screen and (max-width: 1680px) {
+
+			
+		} 
+

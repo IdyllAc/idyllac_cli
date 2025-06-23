@@ -1,0 +1,45 @@
+{
+  "name": "IdyllAc_cli",
+  "version": "1.0.0",
+  "main": "server.js",
+  "scripts": {
+    "start:go": "go run main.go",
+    "start:web": "node server.js",
+    "start:api": "node app.js",
+    "dev:go": "nodemon --exec 'go run' main.go",
+    "dev:web": "nodemon server.js",
+    "dev:api": "nodemon app.js",
+    "start": "concurrently \"go run main.go\" \"node server.js\" \"node app.js\""
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "bcrypt": "^6.0.0",
+    "config": "^4.0.0",
+    "config-json": "^1.0.0",
+    "cors": "^2.8.5",
+    "dotenv": "^16.5.0",
+    "ejs": "^3.1.10",
+    "express": "^5.1.0",
+    "express-flash": "^0.0.2",
+    "express-session": "^1.18.1",
+    "jsonwebtoken": "^9.0.2",
+    "method-override": "^3.0.0",
+    "middleware": "^1.0.0",
+    "multer": "^2.0.0",
+    "mysql": "^2.18.1",
+    "mysql2": "^3.14.1",
+    "passport": "^0.7.0",
+    "passport-jwt": "^4.0.1",
+    "passport-local": "^1.0.0",
+    "sequelize": "^6.37.7",
+    "session": "^0.1.0",
+    "sharp": "^0.34.2"
+  },
+  "devDependencies": {
+    "concurrently": "^9.1.2",
+    "nodemon": "^3.1.10"
+  }
+}

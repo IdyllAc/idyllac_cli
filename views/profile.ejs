@@ -1,0 +1,54 @@
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sittings</title>
+</head>
+<body>
+    <h1>This is my sittings</h1>
+</body>
+</html> -->
+
+<h2>User Profile</h2>
+<form id="profile-form">
+  <input type="text" name="full_name" placeholder="Full Name" required />
+  <input type="number" name="age" placeholder="Age" />
+  <select name="gender">
+    <option value="">Select Gender</option>
+    <option>Male</option><option>Female</option><option>Other</option>
+  </select>
+  <input type="text" name="nationality" placeholder="Nationality" />
+  <input type="text" name="occupation" placeholder="Occupation" />
+  <input type="text" name="phone" placeholder="Phone" />
+  <button type="submit">Save Profile</button>
+</form>
+
+<script>
+fetch('/profile', { headers: { Authorization: 'Bearer ' + localStorage.getItem('accessToken') } })
+  .then(res => res.json())
+  .then(data => {
+    for (const key in data) {
+      if (document.querySelector(`[name="${key}"]`)) {
+        document.querySelector(`[name="${key}"]`).value = data[key];
+      }
+    }
+  });
+
+document.querySelector('#profile-form').addEventListener('submit', async (e) => {
+  e.preventDefault();
+  const formData = Object.fromEntries(new FormData(e.target).entries());
+
+  const res = await fetch('https://anypay.cards/profile', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: 'Bearer ' + localStorage.getItem('accessToken')
+    },
+    body: JSON.stringify(formData)
+  });
+
+  const msg = await res.json();
+  alert(msg.message);
+});
+</script>
