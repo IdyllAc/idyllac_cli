@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "main": "server.js",
   "scripts": {
+     "preinstall": "npx npm-force-resolutions",
     "start:go": "go run main.go",
     "start:web": "node server.js",
     "start:api": "node app.js",
@@ -40,6 +41,11 @@
   },
   "devDependencies": {
     "concurrently": "^9.1.2",
-    "nodemon": "^3.1.10"
+    "nodemon": "^3.1.10",
+    "npm-force-resolutions": "^0.0.10"
+  },
+  "resolutions": {
+    "brace-expansion": "^2.0.1"
   }
+
 }
