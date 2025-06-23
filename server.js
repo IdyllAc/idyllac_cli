@@ -1,6 +1,14 @@
-if (process.env.NODE_ENV !== 'production') {
-    require('dotenv').config();
-}
+require('dotenv').config(); // Always first, to load .env
+
+const env = process.env.NODE_ENV;              // "development" or "production"
+const port = process.env.PORT || 3000;
+const baseURL = process.env.BASE_URL;
+const apiURL = process.env.API_URL;
+
+console.log('Running in:', env);
+console.log('Base URL:', baseURL);
+console.log('API URL:', apiURL);
+
 
 // Importing required modules
 const express = require('express');
@@ -158,5 +166,5 @@ function checkNotAuthenticated(req, res, next) {
 
 // Start Server on port PORT
 app.listen(PORT, () => {
-  console.log(`🚀 Server running on http://localhost:${PORT}`);
+  console.log(`🚀 Server running at ${baseURL} on port ${port} (${env} mode)`);
 });

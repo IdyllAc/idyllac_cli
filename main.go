@@ -11,7 +11,7 @@ import (
 
 	
 	"github.com/gorilla/sessions"
-	"github.com/joho/godotenv"
+	// "github.com/joho/godotenv"
 	"github.com/markbates/goth"
 	"github.com/markbates/goth/gothic"
 	"github.com/markbates/goth/providers/facebook"
@@ -26,9 +26,28 @@ var db *sql.DB
 
 func main() {
 	// Load .env variables
-	if err := godotenv.Load(); err != nil {
-		log.Println("⚠️ .env not loaded, using system env")
+	// if err := godotenv.Load(); err != nil {
+	// 	log.Println("⚠️ .env not loaded, using system env")
+	// }
+
+	env := os.Getenv("ENV")            // "development" or "production"
+	port := os.Getenv("PORT")         // "8080" or "80"
+	baseURL := os.Getenv("BASE_URL")  // "http://localhost:8080" or "https://anypay.cards"
+
+	if port == "" {
+		port = "8080" // Fallback for local or missing env var
 	}
+
+	fmt.Println("Running in:", env)
+	fmt.Println("Base URL:", baseURL)
+
+	// Example root handler
+	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
+		fmt.Fprintf(w, "Hello from %s on port %s", baseURL, port)
+	})
+
+	log.Fatal(http.ListenAndServe(":"+port, nil))
+	
 
 	// Session store
 	key := os.Getenv("SESSION_SECRET")

@@ -28,4 +28,5 @@ func RegisterRoutes() {
     http.HandleFunc("/auth/github/callback", controllers.HandleOAuthCallback("github"))
 
 	  // You can also move other handlers like /subscribe etc. here
+	  
     }
