@@ -160,7 +160,7 @@ func serveIndex(w http.ResponseWriter, r *http.Request) {
 	case "en":
 		http.ServeFile(w, r, "./static/indexEn.html")
 	default:
-		http.ServeFile(w, r, "./static/index.html") // fallback
+		http.ServeFile(w, r, "./index.html") // fallback
 	}
 }
 
