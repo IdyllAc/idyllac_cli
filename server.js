@@ -17,6 +17,7 @@ const bcrypt = require('bcrypt');
 const crypto = require('crypto');
 const router = express.Router();
 const session = require('express-session');
+const MySQLStore = require('express-mysql-session')(session);
 const jwt = require('jsonwebtoken');
 const RefreshToken = require('./models/RefreshToken');
 const flash = require('express-flash');
@@ -38,6 +39,29 @@ initializePassport(
 
 const app = express();
 
+app.set('trust proxy', 1); // ⚠️ Required if behind Render's HTTPS proxy 
+
+// ✅ MySQL session store setup
+const sessionStore = new MySQLStore({
+  host: process.env.DB_HOST,
+  user: process.env.DB_USER,
+  password: process.env.DB_PASSWORD,
+  database: process.env.DB_NAME
+});
+
+// ✅ Use the session middleware with MySQL store
+app.use(session({
+  secret: process.env.SESSION_SECRET,
+  resave: false,
+  saveUninitialized: false,
+  store: sessionStore,
+  cookie: {
+    secure: true,       // ⬅️ Must be true in production with HTTPS
+    httpOnly: true,     // Prevents JS access to the cookie
+    sameSite: 'lax'     // Helps prevent CSRF
+  }
+}));
+
 // View Engine
 app.set('views', path.join(__dirname, '/views'));
 app.set('view engine', 'ejs');
@@ -53,6 +77,8 @@ app.use(session({
   secret: process.env.SESSION_SECRET,
   resave: false,
   saveUninitialized: false,
+  store: sessionStore, // ✅ Use MySQL store here
+  cookie: { secure: false } // use `true` if behind HTTPS + proxy
 }));
 app.use(passport.initialize());
 app.use(passport.session());
