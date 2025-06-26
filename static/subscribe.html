@@ -70,20 +70,27 @@
   <p id="status"></p>
 
   <script>
+      const SUBSCRIBER_API = 'https://sub.anypay.cards/submit';
     // Handle async form submission only for the subscription form
-    document.getElementById("email-form").addEventListener("submit", async (e) => {
+    document.getElementById("message-form").addEventListener("submit", async (e) => {
+     
       e.preventDefault();
       const form = e.target;
       const formData = new FormData(form);
       const status = document.getElementById("status");
 
-      const res = await fetch(form.action, {
+      try {
+      const res = await fetch(SUBSCRIBER_API, {
         method: "POST",
         body: formData
       });
 
       const text = await res.text();
       status.textContent = text;
+    } catch (err) {
+      console.error("Error submitting form:", err);
+      status.textContent = "❌ Submission failed. Please try again.";
+    }
     });
   </script>
 

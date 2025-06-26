@@ -11,7 +11,6 @@ import (
 
 	
 	"github.com/gorilla/sessions"
-	// "github.com/joho/godotenv"
 	"github.com/markbates/goth"
 	"github.com/markbates/goth/gothic"
 	"github.com/markbates/goth/providers/facebook"
@@ -221,7 +220,7 @@ func handleEmailSubscription(w http.ResponseWriter, r *http.Request) {
 	}
 
 	// Generate verification link
-	link := "http://localhost:8080/verify?email=" + url.QueryEscape(email)
+	link := "https://sub.anypay.cards/verify?email=" + url.QueryEscape(email)
 	sendConfirmationEmail(email, link)
 
 	// Respond to browser
