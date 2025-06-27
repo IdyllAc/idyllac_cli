@@ -12,7 +12,7 @@ module.exports = {
         name: "api-server",
         script: "app.js",
         env: {
-          PORT: 3001
+          PORT: 4000
         }
       }
     ]

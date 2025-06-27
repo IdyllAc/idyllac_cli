@@ -26,6 +26,7 @@ const passport = require('passport');
 const sequelize = require('./config/database'); // MySQL connection
 const { User } = require('./models');
 const jwtMiddleware = require('./middleware/jwtMiddleware');
+const publicRoutes = require('./routes/public'); // or user.js if that’s where you added it
 const initializePassport = require('./config/passport');
 
 const PORT = process.env.PORT || 3000;
@@ -66,6 +67,7 @@ app.use(session({
 app.set('views', path.join(__dirname, '/views'));
 app.set('view engine', 'ejs');
 app.use('/', router); // assuming this is part of your view-rendering server
+app.use('/', publicRoutes); // mount routes
 
 // Middleware
 app.use(express.json({ limit: '10mb' }));
@@ -87,7 +89,11 @@ app.use(methodOverride('_method'));
 // JWT middleware for API
 app.use('/api', jwtMiddleware);
 // Auth Routes
-app.use('/auth', require('./routes/auth'));
+app.use('/', require('./routes/public'));      // register, login
+app.use('/auth', require('./routes/auth')); // register/login POST
+app.use('/user', require('./routes/user'));   // profile, settings, protected stuff
+
+
 
 // Sync and Authenticate Database
 sequelize.sync()

@@ -27,7 +27,11 @@ sequelize.sync()
 
 // -------------- Register Route ------------
 router.post('/register', async (req, res) => {
-  const { name, email, password } = req.body;
+  const { name, email, cemail, password } = req.body;
+
+  if (email !== cemail) {
+    return res.status(400).json({ message: 'Emails do not match' });
+  }
 
   try {
     const existingUser = await User.findOne({ where: { email: req.body.email } });
@@ -37,7 +41,10 @@ router.post('/register', async (req, res) => {
      // Insert new user into MySQL database
     const newUser = await User.create({ name, email, password: hashedPassword });
 
-    res.status(201).json({ message: 'New user registered ', user: { id: user.id, email: user.email } });
+    res.status(201).json({ 
+    message: 'New user registered ', 
+    user: { id: user.id, email: user.email }
+   });
   } catch (err) {
     console.error('Register error:', err);
     res.status(500).json({ error: 'Server error' });
