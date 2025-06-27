@@ -98,16 +98,16 @@ sequelize.authenticate()
   .then(() => console.log('✅ Database connected.'))
   .catch(err => console.error('❌ Database connection error:', err));
 
-app.get('/views/login', checkNotAuthenticated, (req, res) => {
+app.get('/login', checkNotAuthenticated, (req, res) => {
   res.render('login');
 });
 
-app.get('/views/register', checkNotAuthenticated, (req, res) => {
+app.get('/register', checkNotAuthenticated, (req, res) => {
   res.render('register');
 });
 
 // POST /register
-app.post('/views/register', checkNotAuthenticated, async (req, res) => {
+app.post('/register', checkNotAuthenticated, async (req, res) => {
   try {
     const { name, email, cemail, password } = req.body;
 
@@ -140,7 +140,7 @@ app.post('/views/register', checkNotAuthenticated, async (req, res) => {
 });
 
 // POST /login — Use only one strategy
-app.post('/views/login', checkNotAuthenticated, passport.authenticate('local', {
+app.post('/login', checkNotAuthenticated, passport.authenticate('local', {
   successRedirect: '/dashboard',
   failureRedirect: '/login',
   failureFlash: true
