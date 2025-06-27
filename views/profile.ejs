@@ -1,26 +1,48 @@
-<!-- <!DOCTYPE html>
+ <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sittings</title>
+    <title>profile</title>
+    <style>
+      body {
+        background-color:darkgray;
+        margin: 0;
+        padding: 0;
+      }
+
+      form {
+        text-align: center;
+      }
+      h2 {
+        text-align: center;
+      }
+      
+      p {
+        text-align: center;
+      }
+    </style>
 </head>
 <body>
-    <h1>This is my sittings</h1>
-</body>
-</html> -->
+<h2>This is your Profile information</h2>
+<p>Here your profile info's are securized. Please update them alway if necessary.<br> You can change your profile information to the tatest and stay in contact.</p>
 
-<h2>User Profile</h2>
 <form id="profile-form">
-  <input type="text" name="full_name" placeholder="Full Name" required />
-  <input type="number" name="age" placeholder="Age" />
   <select name="gender">
     <option value="">Select Gender</option>
     <option>Male</option><option>Female</option><option>Other</option>
   </select>
+  <br><br>
+  <input type="text" name="full_name" placeholder="Full Name" required />
+  <br><br>
+  <input type="number" name="age" placeholder="Age" />
+  <br><br>
   <input type="text" name="nationality" placeholder="Nationality" />
+  <br><br>
   <input type="text" name="occupation" placeholder="Occupation" />
+  <br> <br>
   <input type="text" name="phone" placeholder="Phone" />
+  <br><br>
   <button type="submit">Save Profile</button>
 </form>
 
@@ -52,3 +74,5 @@ document.querySelector('#profile-form').addEventListener('submit', async (e) => 
   alert(msg.message);
 });
 </script>
+</body>
+</html> 

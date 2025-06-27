@@ -1,25 +1,31 @@
-<!-- <!DOCTYPE html>
+ <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sittings</title>
+    <style>
+      body {
+        background-color: darkgray;
+      }
+      form {
+        text-align: center;
+      }
+    </style>
 </head>
 <body>
     <h1>This is my sittings</h1>
-</body>
-</html> -->
 
-<h2>User Settings</h2>
+<h2>This is your sittings information</h2>
 <form id="settings-form">
   <label><input type="checkbox" name="email_notifications" /> Email Notifications</label><br/>
-  <label><input type="checkbox" name="dark_mode" /> Dark Mode</label><br/>
+  <label><input type="checkbox" name="dark_mode" /> Dark Mode</label><br/><br/>
   <select name="language">
     <option value="">Select Language</option>
+    <option value="es">Arab</option>
     <option value="en">English</option>
-    <option value="es">Spanish</option>
     <option value="fr">French</option>
-  </select><br/>
+  </select><br><br/>
   <button type="submit">Save Settings</button>
 </form>
 
@@ -51,3 +57,6 @@ document.querySelector('#settings-form').addEventListener('submit', async (e) =>
   alert(msg.message);
 });
 </script>
+
+</body>
+</html>

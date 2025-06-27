@@ -9,7 +9,6 @@ import (
 	"net/url"
 	"os"
 
-	
 	"github.com/gorilla/sessions"
 	"github.com/markbates/goth"
 	"github.com/markbates/goth/gothic"
@@ -32,7 +31,6 @@ func main() {
 	env := os.Getenv("ENV")            // "development" or "production"
 	port := os.Getenv("PORT")         // "8080" or "80"
 	baseURL := os.Getenv("BASE_URL")  // "http://localhost:8080" or "https://anypay.cards"
-
 	if port == "" {
 		port = "8080" // Fallback for local or missing env var
 	}

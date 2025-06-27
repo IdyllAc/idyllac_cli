@@ -1,6 +1,6 @@
 ### Access protected route with token
 GET http://localhost:4000/auth/dashboard
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiZW1haWwiOiJ2aWN0b3IudmlhN0BnbWFpbC5jb20iLCJpYXQiOjE3NTAwODA2NjEsImV4cCI6MTc1MDA4MTU2MX0.W36Jxjpbt19YJGiM-06ipYQB4d5XCpp9wm9Q8wVfkEQ
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiZW1haWwiOiJ2aWN0b3IudmlhN0BnbWFpbC5jb20iLCJpYXQiOjE3NTA5NDg1MTksImV4cCI6MTc1MDk0OTQxOX0.50nTlUCnXuJv0Wg8RHv8p8pUCoZ0fgbTprkTQrrLj-U
 
 
 
@@ -22,10 +22,8 @@ Content-Type: application/json
 
 
 {
-  "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZW1haWwiOiJ2aWN0b3IudmlhN0BnbWFpbC5jb20iLCJpYXQiOjE3NDkyMjQ5OTgsImV4cCI6MTc0OTgyOTc5OH0.yNd9uDOthPRAsgL5raFhsyd5lXyqBidB_7bWknfv0F8"
+  "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiZW1haWwiOiJ2aWN0b3IudmlhN0BnbWFpbC5jb20iLCJpYXQiOjE3NTA5NDg1MTksImV4cCI6MTc1MTU1MzMxOX0.c6ptZZKLCu_4NPcWy8Tx0WWM1pTU2FxbRdPo6o3m0SM"
 }
-
-
 
 
 ### Register request to create a new user
@@ -39,6 +37,14 @@ Content-Type: application/json
 }
 
 
+### Login request to get the token
+POST http://localhost:4000/auth/login
+Content-Type: application/json
+
+ {
+  "email": "fawzistuka@yahoo.com",
+  "password": "123"
+}
 
 
 ### Login request to get the token
@@ -49,8 +55,6 @@ Content-Type: application/json
   "email": "victor.via7@gmail.com",
   "password": "333639@&"
 }
-
-
 
 
 ### Login request to get the token

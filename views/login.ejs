@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
-  <title>Login</title>
+  <title>Login EJS</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
     integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A=="
     crossorigin="anonymous" referrerpolicy="no-referrer" /> 
@@ -24,6 +24,7 @@
 
    h1 {
      text-align: center;
+     font-family: Georgia, 'Times New Roman', Times, serif;
    }
 
      p {
@@ -85,7 +86,7 @@
        </head>
        <body> 
         <h1 class="mb-3 h3">Login</h1>  
-        <p style="margin-top: 15vh; background-color: green">Do you have account signin?</p> 
+        <p style="margin-top: 15vh; background-color: green">Have account signin.</p> 
         
         <!-- login.ejs -->
            <% if (messages.error) { %> 
@@ -94,7 +95,8 @@
            <div class="alert alert-danger"></div>
            <% } %>
          </div>
-        <h1 style="font-family: cursive;">Sign in here</h1>
+         
+        <h1 style="font-family: cursive;">Log in here</h1>
 
 
       <form id="login-form">
@@ -109,7 +111,7 @@
      
     <br>   
     
-    <div id="message"><p style="background-color: green;">haven't yet? Clic here to
+    <div id="message"><p style="background-color: green;">haven't yet account? Clic here to
       <a href="./views/register.ejs" style= "color: orange;">Register</a></p>
       </div>
 
@@ -149,7 +151,7 @@
        });
       </script>
 
-    <script src="https://kit.fontawesome.com/283a7ae800.js" crossorigin="anonymous"></script>
+      <script src="https://kit.fontawesome.com/283a7ae800.js" crossorigin="anonymous"></script>
 
    </body>
 </html> 
