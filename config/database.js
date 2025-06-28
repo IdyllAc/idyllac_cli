@@ -1,24 +1,22 @@
 require('dotenv').config(); // Load environment variables FIRST
 const { Sequelize } = require('sequelize');
 
-// ✅ Validate essential DB env vars before continuing
-if (!process.env.DB_NAME || !process.env.DB_USER || !process.env.DB_PASSWORD) {
-  console.error('❌ Missing database environment variables in .env');
+
+// ✅ Check for DATABASE_URL (standard in Render)
+if (!process.env.DATABASE_URL) {
+  console.error('❌ Missing DATABASE_URL in environment variables');
   process.exit(1); // Stop the app
 }
 
-// ✅ Proceed to initialize Sequelize
-// Use environment variables
-const sequelize = new Sequelize(
-  process.env.DB_NAME,
-  process.env.DB_USER,
-  process.env.DB_PASSWORD,
-  {
-    host: process.env.DB_HOST || '127.0.0.1',       // ✅ fallback if DB_HOST missing
-    dialect: process.env.DB_DIALECT || 'mysql',    // ✅ fallback if DB_DIALECT missing
-    logging: false, // Optional: disable Sequelize's SQL logging
-  }
-);
+// ✅ Initialize Sequelize with DATABASE_URL (for PostgreSQL)
+const sequelize = new Sequelize(process.env.DATABASE_URL, {
+    dialect: 'postgres',  
+    protocol: 'postgres',  
+    logging: false, // disable logging; change to true if you want SQL logs
+    dialectOptions: {
+      ssl: process.env.NODE_ENV === 'production' ? { require: true, rejectUnauthorized: false } : false,  
+  },
+});
 
 // For debugging – shows what env variables are being read
 console.log('DB ENV:', {
@@ -28,10 +26,10 @@ console.log('DB ENV:', {
   DB_HOST: process.env.DB_HOST
 });
 
-// Test the connection
+// Test connection
 sequelize.authenticate()
-  .then(() => console.log('✅ MySQL Database synced with updated schema'))
-  .catch(err => console.error('❌ DB connection failed:', err));
+  .then(() => console.log('✅ Connected to PostgreSQL via DATABASE_URL'))
+  .catch(err => console.error('❌ Failed to connect to PostgreSQL:', err));
 
-// Export instance
+// Export for use in models
 module.exports = sequelize;

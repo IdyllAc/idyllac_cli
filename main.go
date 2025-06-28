@@ -9,6 +9,7 @@ import (
 	"net/url"
 	"os"
 
+	_ "github.com/lib/pq" // PostgreSQL driver
 	"github.com/gorilla/sessions"
 	"github.com/markbates/goth"
 	"github.com/markbates/goth/gothic"
@@ -23,30 +24,21 @@ import (
 var db *sql.DB
 
 func main() {
-	// Load .env variables
-	// if err := godotenv.Load(); err != nil {
-	// 	log.Println("⚠️ .env not loaded, using system env")
-	// }
-
+	// Load config
 	env := os.Getenv("ENV")            // "development" or "production"
 	port := os.Getenv("PORT")         // "8080" or "80"
-	baseURL := os.Getenv("BASE_URL")  // "http://localhost:8080" or "https://anypay.cards"
 	if port == "" {
 		port = "8080" // Fallback for local or missing env var
 	}
-
+	baseURL := os.Getenv("BASE_URL")  // "http://localhost:8080" or "https://anypay.cards"
+	if baseURL == "" {
+		log.Fatal("❌ BASE_URL is required")
+	  }
+	
 	fmt.Println("Running in:", env)
 	fmt.Println("Base URL:", baseURL)
 
-	// Example root handler
-	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
-		fmt.Fprintf(w, "Hello from %s on port %s", baseURL, port)
-	})
-
-	log.Fatal(http.ListenAndServe(":"+port, nil))
-	
-
-	// Session store
+	// Sessions and OAuth setup
 	key := os.Getenv("SESSION_SECRET")
 	if key == "" {
 		log.Fatal("❌ SESSION_SECRET is missing in .env")
@@ -65,25 +57,27 @@ func main() {
 		github.New(os.Getenv("GITHUB_KEY"), os.Getenv("GITHUB_SECRET"), "https://anypay.cards/auth/github/callback"),
 	)
 	
-	// db, err = sql.Open("sqlite", "./subscribe/DB_subscribers.db")
+	// Database connection via DATABASE_URL
+	dbURL := os.Getenv("DATABASE_URL")
+	if dbURL == "" {
+	  log.Fatal("❌ DATABASE_URL is required for Postgres")
+	}
+	
 	 
-	// Connect to MySQL DB
-	 db, err := models.InitDB()  
-	 if err != nil {
-		log.Fatal("❌ DB connection failed:", err)
+	var err error
+	db, err = sql.Open("postgres", dbURL)
+	if err != nil {
+	  log.Fatal("❌ DB connection failed:", err)
 	}
 	defer db.Close()
 	models.DB = db // Store globally
 
-	// Auto-create tables
-	createTables()
+	createTables() // Create subscribers & message tables
 
-
-	// Static file server
+	// Static files & HTTPhandlers
 	fs := http.FileServer(http.Dir("./static"))
-	http.Handle("/static/", http.StripPrefix("/static/", fs))
-
 	// Serve HTML pages
+	http.Handle("/static/", http.StripPrefix("/static/", fs)) 
 	http.HandleFunc("/", serveIndex)
 	http.HandleFunc("/subscribe", serveSubscribe)
 	http.HandleFunc("/subscriber/email", handleEmailSubscription)
@@ -105,15 +99,15 @@ func main() {
 	// http.ListenAndServe(":8080", r)
 
 	// Start server
-	log.Println("🌐 Server started at https://anypay.cards (port 8080)")
-	log.Fatal(http.ListenAndServe(":8080", nil))
+	log.Println("🌐 Server started at", baseURL, "on port", port)
+	log.Fatal(http.ListenAndServe(":"+port, nil))
 }
 
 // ✅ This function is now outside of main
 func createTables() {
 	// Make sure db is initialized and open
 	if db == nil {
-		log.Fatal("❌ DB is not initialized")
+		log.Fatal("❌ DB not initialized")
 	}
 
 	subscriberTable := `

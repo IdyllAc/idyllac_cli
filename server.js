@@ -94,7 +94,6 @@ app.use('/auth', require('./routes/auth')); // register/login POST
 app.use('/user', require('./routes/user'));   // profile, settings, protected stuff
 
 
-
 // Sync and Authenticate Database
 sequelize.sync()
   .then(() => console.log('✅ All models synced successfully.'))
