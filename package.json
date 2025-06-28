@@ -10,7 +10,7 @@
     "dev:go": "nodemon --exec 'go run' main.go",
     "dev:web": "nodemon server.js",
     "dev:api": "nodemon app.js",
-    "start": "concurrently \"go run main.go\" \"node server.js\" \"node app.js\""
+    "start": "node server.js"
   },
   "keywords": [],
   "author": "",
