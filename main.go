@@ -9,8 +9,8 @@ import (
 	"net/url"
 	"os"
 
-	_ "github.com/lib/pq" // PostgreSQL driver
 	"github.com/gorilla/sessions"
+	_ "github.com/lib/pq" // PostgreSQL driver
 	"github.com/markbates/goth"
 	"github.com/markbates/goth/gothic"
 	"github.com/markbates/goth/providers/facebook"
@@ -30,6 +30,8 @@ func main() {
 	if port == "" {
 		port = "8080" // Fallback for local or missing env var
 	}
+	
+	models.InitDB() // will connect and set models.DB
 	baseURL := os.Getenv("BASE_URL")  // "http://localhost:8080" or "https://anypay.cards"
 	if baseURL == "" {
 		log.Fatal("❌ BASE_URL is required")
@@ -58,18 +60,17 @@ func main() {
 	)
 	
 	// Database connection via DATABASE_URL
+	
 	dbURL := os.Getenv("DATABASE_URL")
 	if dbURL == "" {
 	  log.Fatal("❌ DATABASE_URL is required for Postgres")
 	}
-	
-	 
+
 	var err error
 	db, err = sql.Open("postgres", dbURL)
 	if err != nil {
 	  log.Fatal("❌ DB connection failed:", err)
 	}
-	defer db.Close()
 	models.DB = db // Store globally
 
 	createTables() // Create subscribers & message tables

@@ -12,6 +12,8 @@ const personalRoutes = require('./routes/personal'); // /submit/personal_info
 const protectRoutes = require('./routes/protect');   // /submit/upload/document + /selfie
 const userRoutes = require('./routes/user');         // /profile, /settings
 
+const port = process.env.PORT || 4000 
+
 // Initialize Express
 const app = express();
 

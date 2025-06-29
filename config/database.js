@@ -11,20 +11,22 @@ if (!process.env.DATABASE_URL) {
 // ✅ Initialize Sequelize with DATABASE_URL (for PostgreSQL)
 const sequelize = new Sequelize(process.env.DATABASE_URL, {
     dialect: 'postgres',  
-    protocol: 'postgres',  
-    logging: false, // disable logging; change to true if you want SQL logs
+    protocol: 'postgres', 
+    logging: false, // disable logging; change to true if you want SQL logs 
     dialectOptions: {
-      ssl: process.env.NODE_ENV === 'production' ? { require: true, rejectUnauthorized: false } : false,  
+      ssl: { require: true,
+        rejectUnauthorized: false,
+       }  
   },
 });
 
-// For debugging – shows what env variables are being read
-console.log('DB ENV:', {
-  DB_NAME: process.env.DB_NAME,
-  DB_USER: process.env.DB_USER,
-  DB_PASSWORD: process.env.DB_PASSWORD,
-  DB_HOST: process.env.DB_HOST
-});
+// // For debugging – shows what env variables are being read
+// console.log('DB ENV:', {
+//   DB_NAME: process.env.DB_NAME,
+//   DB_USER: process.env.DB_USER,
+//   DB_PASSWORD: process.env.DB_PASSWORD,
+//   DB_HOST: process.env.DB_HOST
+// });
 
 // Test connection
 sequelize.authenticate()
